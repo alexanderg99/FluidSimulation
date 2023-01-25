@@ -23,9 +23,32 @@ public class UniformGrid : MonoBehaviour
     public static int XVoxelsPerSide;
     public static int YVoxelsPerSide;
     public static int ZVoxelsPerSide;
+
+    
+    // this is the GPU implementation
+    private ComputeBuffer posBuffer;
+    void OnEnable () {
+        posBuffer = new ComputeBuffer(8 * 8, 12);
+        //ComputeShader.Dispatch(0, 2, 4, 1);
+
+
+    }
+    
+    void OnDisable () {
+        posBuffer.Release();
+        posBuffer = null;
+    }
+    
+    //this is the end of the GPU implementation.
+    
+    
+    
     
 
     [SerializeField] Material transparentMaterial;
+
+
+    
 
     private void NewInitializeNeighbours()
     {
